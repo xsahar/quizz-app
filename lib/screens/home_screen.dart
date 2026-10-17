@@ -1,14 +1,15 @@
-
 import 'package:flutter/material.dart';
+
 import 'category_screen.dart';
+import '../theme/app_colors.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  static const Color backgroundColor = Color(0xFFE2E4EC);
-  static const Color primaryColor = Color(0xFF7209B7);
-  static const Color secondaryColor = Color(0xFF3A0CA3);
-  static const Color textColor = Color(0xFF1E293B);
+  static const Color backgroundColor = AppColors.background;
+  static const Color primaryColor = AppColors.primary;
+  static const Color secondaryColor = AppColors.secondary;
+  static const Color textColor = AppColors.text;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +20,10 @@ class HomeScreen extends StatelessWidget {
           builder: (context, constraints) {
             return SingleChildScrollView(
               child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight: constraints.maxHeight,
-                ),
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
                 child: IntrinsicHeight(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      24, 20, 24, 24,
-                    ),
+                    padding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -81,11 +78,7 @@ class HomeScreen extends StatelessWidget {
             color: primaryColor.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: const Icon(
-            Icons.quiz_rounded,
-            color: primaryColor,
-            size: 24,
-          ),
+          child: const Icon(Icons.quiz_rounded, color: primaryColor, size: 24),
         ),
         const SizedBox(width: 12),
         const Text(
@@ -154,17 +147,11 @@ class HomeScreen extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: _buildFeatureCard(
-                Icons.bolt_rounded,
-                'Instant Feedback',
-              ),
+              child: _buildFeatureCard(Icons.bolt_rounded, 'Instant Feedback'),
             ),
             const SizedBox(width: 14),
             Expanded(
-              child: _buildFeatureCard(
-                Icons.category_rounded,
-                'Multi-Topic',
-              ),
+              child: _buildFeatureCard(Icons.category_rounded, 'Multi-Topic'),
             ),
           ],
         ),
@@ -179,10 +166,7 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(width: 14),
             Expanded(
-              child: _buildFeatureCard(
-                Icons.timer_rounded,
-                'Quick Rounds',
-              ),
+              child: _buildFeatureCard(Icons.timer_rounded, 'Quick Rounds'),
             ),
           ],
         ),
@@ -207,11 +191,7 @@ class HomeScreen extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(
-            icon,
-            color: primaryColor,
-            size: 20,
-          ),
+          Icon(icon, color: primaryColor, size: 20),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
@@ -236,11 +216,9 @@ class HomeScreen extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFFF3E8FC),
+        color: AppColors.softPurple,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: primaryColor.withValues(alpha: 0.08),
-        ),
+        border: Border.all(color: primaryColor.withValues(alpha: 0.08)),
       ),
       child: Row(
         children: [
@@ -273,7 +251,7 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   'Pick a topic and test your knowledge!',
                   style: TextStyle(
-                    color: Color(0xFF64748B),
+                    color: AppColors.mutedText,
                     fontSize: 12,
                     height: 1.4,
                   ),
@@ -316,7 +294,7 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Featured: World History',
+                      'Pick a Quiz Category',
                       style: TextStyle(
                         color: textColor,
                         fontWeight: FontWeight.bold,
@@ -325,11 +303,8 @@ class HomeScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 5),
                     Text(
-                      '10 True or False Questions',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12,
-                      ),
+                      'Six topics, 10 questions each',
+                      style: TextStyle(color: Colors.grey, fontSize: 12),
                     ),
                   ],
                 ),
@@ -377,9 +352,7 @@ class HomeScreen extends StatelessWidget {
   void _openCategories(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-        builder: (context) => const CategoryScreen(),
-      ),
+      MaterialPageRoute(builder: (context) => const CategoryScreen()),
     );
   }
 }

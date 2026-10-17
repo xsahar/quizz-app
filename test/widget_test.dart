@@ -5,26 +5,56 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:quizz_app/data/quizz_data.dart';
 import 'package:quizz_app/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('a category quiz completes and shows its score', (tester) async {
+    expect(QuizData.categories, hasLength(6));
+    for (final category in QuizData.categories) {
+      expect(category.questions, hasLength(10));
+    }
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.pumpWidget(const QuizApp());
+    await tester.ensureVisible(find.text('Get Started'));
+    await tester.tap(find.text('Get Started'));
+    await tester.pumpAndSettle();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    final category = QuizData.categories.first;
+    await tester.ensureVisible(find.text(category.name));
+    await tester.tap(find.text(category.name));
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    for (var index = 0; index < category.questions.length; index++) {
+      final question = category.questions[index];
+      expect(find.text(question.text), findsOneWidget);
+
+      final answerCorrectly = index != 0;
+      final answer = answerCorrectly ? question.answer : !question.answer;
+      await tester.tap(find.text(answer ? 'True' : 'False'));
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          answerCorrectly ? 'Correct!' : 'Not quite. Try the next one!',
+        ),
+        findsOneWidget,
+      );
+
+      final nextButton = index == category.questions.length - 1
+          ? 'See Your Score'
+          : 'Next Question';
+      await tester.ensureVisible(find.text(nextButton));
+      await tester.tap(find.text(nextButton));
+      await tester.pumpAndSettle();
+    }
+
+    expect(find.text('9 / 10'), findsOneWidget);
+    expect(find.text('90% correct'), findsOneWidget);
+
+    await tester.tap(find.text('Back to Home'));
+    await tester.pumpAndSettle();
+    expect(find.text('Get Started'), findsOneWidget);
   });
 }
