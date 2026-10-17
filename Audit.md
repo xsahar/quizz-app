@@ -1,39 +1,34 @@
-#### Functional
+# Project Audit
 
-> In order to run and hot reload the app either on emulator or device, follow the [instructions](https://docs.flutter.dev/get-started/test-drive?tab=androidstudio#run-the-app)
+## Functional requirements
 
-###### Does the app run without crashing?
+- [x] **Runs without crashing:** `flutter test test/widget_test.dart` exercises
+  the full quiz flow, and `flutter analyze` completes without issues.
+- [x] **Changes state during use:** answering updates feedback and score;
+  continuing advances the question.
+- [x] **At least five categories:** the app has six categories.
+- [x] **At least ten questions per category:** each category contains ten.
+- [x] **At least ten questions per quiz:** each quiz contains ten.
+- [x] **Relevant category names and images:** every category uses its own
+  registered image asset.
+- [x] **Category selection opens `DetailedView`:** selecting a category pushes
+  the `DetailedView` route.
+- [x] **Question page contents:** `DetailedView` displays the question, category
+  image, and True/False buttons.
+- [x] **Answer progression:** a submitted answer is evaluated once; the user can
+  proceed to the next question and then to the score.
+- [x] **Answer feedback:** the app indicates whether the selected answer is
+  correct.
+- [x] **Score and return home:** the score screen displays the result and has a
+  Back to Home button.
 
-###### Does the app change states as it is being used, i.e. is it stateful?
+## Optional bonus requirements
 
-###### Are there a minimum of 5 distinct categories present within the app?
+These are not required for the core app:
 
-###### Are there at least 10 questions to each category and?
-
-###### Are there at least 10 questions in a quiz?
-
-###### Are the categories named appropriately and accompanied by relevant images?
-
-###### Does selecting a category switch from the first route to a second route called `DetailedView`?
-
-###### Does the page containing questions display the text of the question, an image related to the selected category, and buttons for selecting either `true/false` as the answer?
-
-###### Does selecting one of the `true/false` buttons allow the user to answer the question and proceed to the next question or the score view if all questions have been answered?
-
-###### Is there a feature in the app that provides feedback on whether the user's answer to the question is correct or incorrect after pressing the `true/false` buttons?
-
-###### Does the final page of the quiz correctly display the user's `score` and provide a `button` to return to the main page?
-
-#### Bonus:
-
-###### +Are there specific images for each of the questions?
-
-###### +Is there a time to answer each question?
-
-###### +When the question is not answered within the given time, is it omitted, considered as answered incorrectly and we move on to the next question?
-
-###### +Are the questions within each category shuffled so that the order of the questions is different each time the user plays the game?
-
-###### +Are there easy, medium, and hard difficulty levels for each category?
-
-###### +Does the leaderboard display the top scores achieved by different users of the app?
+- [ ] Individual images for every question.
+- [ ] A timer for each question.
+- [ ] Automatic handling of unanswered timed questions.
+- [ ] Shuffling questions for each playthrough.
+- [ ] Difficulty levels.
+- [ ] A leaderboard.

@@ -4,16 +4,16 @@ import '../models/category.dart';
 import '../theme/app_colors.dart';
 import 'score_screen.dart';
 
-class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({required this.category, super.key});
+class DetailedView extends StatefulWidget {
+  const DetailedView({required this.category, super.key});
 
   final Category category;
 
   @override
-  State<QuestionScreen> createState() => _QuestionScreenState();
+  State<DetailedView> createState() => _DetailedViewState();
 }
 
-class _QuestionScreenState extends State<QuestionScreen> {
+class _DetailedViewState extends State<DetailedView> {
   int _questionIndex = 0;
   int _score = 0;
   bool? _selectedAnswer;
@@ -270,10 +270,7 @@ class _AnswerButton extends StatelessWidget {
           disabledForegroundColor: foregroundColor,
           backgroundColor: buttonColor,
           disabledBackgroundColor: buttonColor,
-          side: BorderSide(
-            color: borderColor,
-            width: 1.5,
-          ),
+          side: BorderSide(color: borderColor, width: 1.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),

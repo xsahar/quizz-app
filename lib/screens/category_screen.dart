@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/quizz_data.dart';
 import '../theme/app_colors.dart';
-import 'question_screen.dart';
+import 'detailed_view.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -86,8 +86,7 @@ class CategoryScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) =>
-                                  QuestionScreen(category: category),
+                              builder: (_) => DetailedView(category: category),
                             ),
                           );
                         },
